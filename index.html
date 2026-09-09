@@ -1,89 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#c94f68">
-<title>مريومه للهاند ميد</title>
-<link rel="manifest" href="manifest.json">
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#fff8f5;color:#4b252c}
-header{position:sticky;top:0;z-index:5;background:#fffaf8ee;backdrop-filter:blur(10px);border-bottom:1px solid #f0d9d5}
-.wrap{max-width:1050px;margin:auto;padding:0 18px}.top{height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:25px;font-weight:800;color:#7f293d}.logo small{display:block;font-size:11px;color:#a96a75;font-weight:500}
-.icon{border:0;background:#fff0ed;border-radius:14px;padding:11px 13px;color:#8e3448;font-size:18px;cursor:pointer}
-.hero{margin:22px 0;background:linear-gradient(135deg,#f8ddd6,#fff2ee);border-radius:28px;padding:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 10px 30px #9b556016}
-.hero h1{font-size:34px;margin:0 0 8px}.hero p{color:#805861;line-height:1.8}.btn{border:0;background:#c94f68;color:white;padding:13px 20px;border-radius:18px;font-weight:700;cursor:pointer}
-.search{display:flex;background:white;border:1px solid #efdcd8;border-radius:17px;padding:5px;margin:18px 0}.search input{border:0;outline:0;flex:1;padding:12px;font-size:15px;background:transparent}
-.cats{display:flex;gap:10px;overflow:auto;padding-bottom:8px}.cat{white-space:nowrap;border:1px solid #ead1cd;background:#fff;border-radius:20px;padding:10px 16px;cursor:pointer}.cat.active{background:#c94f68;color:#fff;border-color:#c94f68}
-h2{margin:26px 0 14px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{background:#fff;border:1px solid #f0dedb;border-radius:20px;overflow:hidden;box-shadow:0 7px 20px #6b293012}.pic{height:180px;background:linear-gradient(135deg,#ead0c6,#f8e8e1);display:flex;align-items:center;justify-content:center;font-size:58px}.body{padding:13px}.name{font-weight:800;margin-bottom:7px}.price{color:#c33f59;font-weight:800}.actions{display:flex;gap:8px;margin-top:12px}.actions button{flex:1;padding:9px;border-radius:12px;border:1px solid #ead1cd;background:#fff;cursor:pointer;color:#7f293d}.actions .add{background:#c94f68;color:#fff;border-color:#c94f68}
-footer{margin-top:40px;background:#5b2d36;color:#fff;padding:30px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.muted{color:#dcbfc3;font-size:13px}
-.modal{display:none;position:fixed;inset:0;background:#0006;z-index:20;align-items:flex-end}.modal.show{display:flex}.sheet{background:#fff8f5;width:100%;max-width:620px;margin:auto;border-radius:25px 25px 0 0;padding:22px;max-height:85vh;overflow:auto}.row{display:flex;justify-content:space-between;gap:15px;align-items:center;border-bottom:1px solid #efdcd8;padding:12px 0}.close{float:left;border:0;background:none;font-size:24px;cursor:pointer}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero{padding:24px}.hero h1{font-size:27px}.pic{height:145px}}
-@media(min-width:801px){.modal{align-items:center}.sheet{border-radius:25px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maryoma Handmade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background-color: #f8f9fa; color: #333; padding-bottom: 40px; }
+    header { background: linear-gradient(135deg, #d63384, #d6336c); color: white; text-align: center; padding: 25px 15px; }
+    header h1 { font-size: 28px; margin-bottom: 5px; }
+    header p { font-size: 14px; opacity: 0.9; }
+    .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+    .categories { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin-bottom: 20px; }
+    .cat-btn { background: #fff; border: 1px solid #ddd; padding: 8px 18px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-weight: 600; }
+    .cat-btn.active { background: #d63384; color: white; border-color: #d63384; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.3s; }
+    .card:hover { transform: translateY(-3px); }
+    .card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+    .card-body { padding: 15px; }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .card-price { font-size: 18px; color: #d63384; font-weight: 700; }
+    .loading { text-align: center; padding: 40px; font-size: 18px; color: #666; }
+  </style>
 </head>
 <body>
-<header><div class="wrap top">
-<div class="logo">مريومه <small>للهاند ميد • Handmade with Love</small></div>
-<button class="icon" onclick="openCart()">🛒 <span id="count">0</span></button>
-</div></header>
 
-<main class="wrap">
-<section class="hero">
-<div><h1>كل قطعة… حكاية بإبداع ❤️</h1><p>منتجات هاند ميد مميزة، مصنوعة بحب وتفاصيل تفرق.</p><button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">تصفح المنتجات</button></div>
-<div style="font-size:95px">🧶🌸🎁</div>
-</section>
+  <header>
+    <h1>Maryoma Handmade</h1>
+    <p>كتالوج المنتجات المصنوعة بكل حب</p>
+  </header>
 
-<div class="search"><span style="padding:12px">🔎</span><input id="search" placeholder="ابحث عن منتج..." oninput="render()"></div>
-<div class="cats" id="cats"></div>
-<h2 id="products">أحدث المنتجات</h2>
-<div class="grid" id="grid"></div>
-</main>
+  <div class="container">
+    <div class="categories" id="categories">
+      <button class="cat-btn active" onclick="filterCategory('الكل')">الكل</button>
+    </div>
 
-<footer><div class="wrap foot"><div><b>مريومه للهاند ميد</b><div class="muted">كل قطعة مصنوعة بحب ❤️</div></div><div><b>اطلب الآن</b><div class="muted">تواصل معنا عبر واتساب</div></div></div></footer>
+    <div id="loader" class="loading">جاري تحميل المنتجات...</div>
+    <div class="grid" id="products-grid"></div>
+  </div>
 
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
-<button class="close" onclick="closeModal()">×</button><h2>سلة المشتريات</h2><div id="cart"></div><hr><div style="display:flex;justify-content:space-between;font-weight:800;padding:15px 0"><span>الإجمالي</span><span id="total">0 جنيه</span></div>
-<button class="btn" style="width:100%" onclick="order()">إتمام الطلب عبر واتساب</button>
-</div></div>
+  <script>
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/1RKQ_p8rA1PC11Wa_m5dB-6KYUNRrehwq6mwZnAyMYY8/gviz/tq?tqx=out:json';
 
-<script>
-const products=[
-{name:"شنطة كروشيه يدوية",price:200,cat:"شنط",emoji:"👜"},
-{name:"دبدوب كروشيه",price:150,cat:"هدايا",emoji:"🧸"},
-{name:"أسورة خرز يدوية",price:80,cat:"إكسسوارات",emoji:"📿"},
-{name:"منظم زهور هاند ميد",price:120,cat:"ديكورات",emoji:"🌷"},
-{name:"علبة هدايا مميزة",price:180,cat:"هدايا",emoji:"🎁"},
-{name:"ديكور ريزن",price:220,cat:"ديكورات",emoji:"✨"},
-{name:"مفرش قطعة قماشية",price:140,cat:"مفارش",emoji:"🧵"},
-{name:"إكسسوار يدوي",price:95,cat:"إكسسوارات",emoji:"💍"}
-];
-let active="الكل", cart=[];
-const cats=["الكل",...new Set(products.map(p=>p.cat))];
-document.getElementById("cats").innerHTML=cats.map(c=>`<button class="cat ${c==="الكل"?"active":""}" onclick="setCat('${c}')">${c}</button>`).join("");
-function setCat(c){active=c;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.textContent===c));render()}
-function render(){
- const q=document.getElementById("search").value.trim().toLowerCase();
- const list=products.filter(p=>(active==="الكل"||p.cat===active)&&p.name.toLowerCase().includes(q));
- document.getElementById("grid").innerHTML=list.map((p,i)=>`<article class="card"><div class="pic">${p.emoji}</div><div class="body"><div class="name">${p.name}</div><div class="price">${p.price} جنيه</div><div class="actions"><button onclick="details('${p.name}')">التفاصيل</button><button class="add" onclick="add('${p.name}')">أضف للسلة</button></div></div></article>`).join("")||"<p>لا توجد منتجات مطابقة.</p>";
-}
-function add(name){let p=products.find(x=>x.name===name);let old=cart.find(x=>x.name===name);old?old.qty++:cart.push({...p,qty:1});updateCount();openCart()}
-function updateCount(){document.getElementById("count").textContent=cart.reduce((s,p)=>s+p.qty,0)}
-function openCart(){document.getElementById("modal").classList.add("show");drawCart()}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-function drawCart(){
- document.getElementById("cart").innerHTML=cart.length?cart.map((p,i)=>`<div class="row"><div>${p.emoji} <b>${p.name}</b><br><span class="muted">${p.price} جنيه × ${p.qty}</span></div><div><button class="icon" onclick="change(${i},-1)">−</button> <button class="icon" onclick="change(${i},1)">+</button></div></div>`).join(""):"<p>السلة فارغة.</p>";
- document.getElementById("total").textContent=cart.reduce((s,p)=>s+p.price*p.qty,0)+" جنيه";
-}
-function change(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);updateCount();drawCart()}
-function details(name){let p=products.find(x=>x.name===name);alert(`${p.name}\nالسعر: ${p.price} جنيه\n\nمنتج هاند ميد مصنوع بعناية ويمكن طلبه والتواصل معنا عبر واتساب.`)}
-function order(){
- if(!cart.length)return alert("أضف منتجًا للسلة أولاً.");
- const text="مرحباً مريومه للهاند ميد 🌸%0Aأريد طلب:%0A"+cart.map(p=>`- ${p.name} × ${p.qty}`).join("%0A")+`%0Aالإجمالي: ${cart.reduce((s,p)=>s+p.price*p.qty,0)} جنيه`;
- window.open("https://wa.me/201203175124?text="+text,"_blank");
-}
-render();
-</script>
-</body></html>
+    let allProducts = [];
+
+    async function fetchProducts() {
+      try {
+        const response = await fetch(sheetUrl);
+        const text = await response.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        
+        const rows = json.table.rows;
+        allProducts = rows.map(row => ({
+          name: row.c[0] ? row.c[0].v : '',
+          price: row.c[1] ? row.c[1].v : '',
+          image: row.c[2] ? row.c[2].v : 'https://via.placeholder.com/300?text=No+Image',
+          category: row.c[3] ? row.c[3].v : 'عام'
+        }));
+
+        document.getElementById('loader').style.display = 'none';
+        setupCategories();
+        renderProducts(allProducts);
+      } catch (error) {
+        document.getElementById('loader').innerText = 'حدث خطأ أثناء تحميل البيانات.';
+      }
+    }
+
+    function renderProducts(products) {
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = products.map(p => `
+        <div class="card">
+          <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300?text=صورة+غير+متاحة'">
+          <div class="card-body">
+            <div class="card-title">${p.name}</div>
+            <div class="card-price">${p.price} جنيه</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setupCategories() {
+      const cats = ['الكل', ...new Set(allProducts.map(p => p.category).filter(Boolean))];
+      const catContainer = document.getElementById('categories');
+      catContainer.innerHTML = cats.map((c, i) => `
+        <button class="cat-btn ${i === 0 ? 'active' : ''}" onclick="filterCategory('${c}', this)">${c}</button>
+      `).join('');
+    }
+
+    function filterCategory(cat, btn) {
+      if (btn) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      if (cat === 'الكل') {
+        renderProducts(allProducts);
+      } else {
+        renderProducts(allProducts.filter(p => p.category === cat));
+      }
+    }
+
+    fetchProducts();
+  </script>
+</body>
+</html>
